@@ -1,0 +1,111 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* Menu */
+.menu {
+    background-color: #0c2d57;
+    padding: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column; /* empilha logo + menu */
+    align-items: flex-start;
+    gap: 20px; /* espaço entre logo e menu */
+}
+
+/* Logo e imagem lado a lado */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 255px; /* espaço entre logo e texto */
+}
+
+.logo-container img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 6px; 
+}
+
+.logo-container h1 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Lista de links */
+.menu ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Links */
+.menu ul li a {
+    text-decoration: none;
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 8px;
+
+    transition: all 0.3s ease;
+}
+
+/* Ícones */
+.menu ul li a span {
+    font-size: 22px;
+}
+
+/* Texto */
+.menu ul li a {
+    font-size: 14px;
+}
+
+/* Hover */
+.menu ul li a:hover {
+    background-color: #1f4e8c;
+    transform: translateY(-2px);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .menu ul li a {
+        width: 100%;
+        text-align: center;
+    }
+}
