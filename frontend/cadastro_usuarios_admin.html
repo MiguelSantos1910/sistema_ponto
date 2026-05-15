@@ -15,16 +15,16 @@
                 <input type="text" id="nome" name="nome" required>
 
                 <label for="usuario">Usuário</label>
-                <input type="text" id="usuario" name="usuario" placeholder="Insira o nome de usuário">
+                <input type="text" id="usuario" name="usuario" placeholder="Insira o nome de usuário" required>
 
                 <label for="senha">Senha</label>
                 <input type="password" id="senha" name="senha" placeholder="Insira a senha" required>
 
-                <button type="submit">Cadastrar Usuário</button>
-                <a href="../frontend/login.html">Login</a>
+                <button type="submit">Cadastrar Usuário</button><br>
+                <button type="submit" onclick="window.location.href='../frontend/menu.html'">Voltar</button>
             </form>
         </div>
     </div>
 </body>
-<script src="../backend/cadastro_usuario.js"></script>
+<script src="../backend/cadastro_usuario_admin.js"></script>
 </html>

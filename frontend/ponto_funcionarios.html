@@ -4,28 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="../style/ponto_oficineiros.css">
+<link rel="stylesheet" href="../style/ponto_funcionarios.css">
 
-<title>Ponto dos Oficineiros</title>
+<title>Ponto dos Funcionários</title>
 
 </head>
 
 <body>
 
-<h1>Ponto dos Oficineiros</h1>
+<h1>Ponto dos Funcionários</h1>
 
 <div class="container">
 
-<form id="oficineiros">
+<form id="funcionarios">
 
 <div>
 <label for="nome">Nome:</label>
 <input type="text" id="nome" name="nome" required>
-</div>
- 
-<div>
-<label for="matricula">Matricula:</label>
-<input type="text" id="matricula" name="matricula" required>
 </div>
 
 <div>
@@ -75,21 +70,18 @@
 
 <div class="full">
 <label for="arquivo">Carregar planilha (EXCEL):</label>
-<input type="file" id="arquivo" name="arquivo">
+<input type="file" id="arquivo" name="arquivo" required>
 </div>
-
-<button type="submit">
+  
+<button type="button">
 Registrar Ponto
 </button>
 
 <button type="button" id="voltar" onclick="window.location.href='../frontend/menu.html'">
 Voltar
 </button>
-
 </form>
 
 </div>
-
 </body>
-<script src="../backend/cadastro_oficineiros.js"></script>
 </html>

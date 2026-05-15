@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Sistema de Ponto</title>
+<link rel="stylesheet" href="../style/dashboard.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Dashboard</h1>
+
+    <!-- CARDS RESUMO -->
+    <div class="cards-resumo">
+
+        <div class="card pequeno">
+            <h3>Horas Hoje</h3>
+            <p id="horas-hoje">
+                00:00
+            </p>
+        </div>
+
+        <div class="card pequeno">
+            <h3>Banco de Horas</h3>
+            <p id="saldo-horas">
+                0h
+            </p>
+        </div>
+        <div class="card pequeno">
+            <h3>Total Registros</h3>
+            <p id="total-registros">
+                0h
+            </p>
+        </div>
+        <div class="card pequeno">
+            <h3>Status</h3>
+            <p id="status">
+                Fora do expediente
+            </p>
+        </div>
+    </div>
+    <!-- ÁREA PRINCIPAL -->
+    <div class="cards-principais">
+
+        <!-- HISTÓRICO -->
+        <div class="card grande">
+            <h2>Histórico de Ponto</h2>
+            <div class="historico">
+                <table>
+                    <thead>
+                       <tr>
+                            <th>Data</th>
+                            <th>Entrada</th>
+                            <th>Saída</th>
+                            <th>Horas</th>
+                       </tr>
+                    </thead>
+                    <tbody id="historico-body">
+                        <tr>
+                            <td>--/--/----</td>
+                            <td>--:--</td>
+                            <td>--:--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+           </div>
+        </div>
+        <!-- BANCO DE HORAS -->
+        <div class="card medio">
+            <h2>Banco de Horas</h2>
+            <div class="banco-horas">
+                <p>
+                    Saldo Atual:
+                    <strong id="saldo-atual">
+                        0h
+                    </strong>
+                </p>
+                <p>
+                    Horas Extras:
+                    <strong id="horas-extras">
+                        0h
+                    </strong>
+                </p>
+                <p>
+                    Horas Faltantes:
+                    <strong id="horas-faltantes">
+                        0h
+                    </strong>
+                </p>
+            </div>
+        </div>
+        <!-- RESUMO DO DIA -->
+        <div class="card medio">
+            <h2>Resumo do Dia</h2>
+            <iv class="resumo-dia">
+                <p>
+                    Entrada:
+                    <strong id="entrada-dia">
+                        --:--
+                    </strong>
+                </p>
+                <p>
+                    Saída:
+                    <strong id="saida-dia">
+                        --:--
+                    </strong>
+                </p>
+                <p>
+                    Horas Trabalhadas:
+                    <strong id="horas-dia">
+                        0h
+                    </strong>
+                </p>
+            </div>
+        </div><br>
+        <!-- ALERTAS -->
+        <div class="card medio">
+            <h2>Alertas</h2>
+            <div class="alertas">
+                <ul>
+                    <li>
+                        Nenhum alerta no momento.
+                    </li>
+                </ul>
+            </div>
+        </div><br>
+        <!-- GRÁFICO (FUTURO) -->
+        <div class="card grande">
+            <h2>Horas Trabalhadas (Gráfico)</h2>
+            <div class="grafico">
+                <canvas id="grafico-horas"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" id="voltar" onclick="window.location.href='../frontend/menu.html'">
+    Voltar
+</button>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../backend/dashboard.js"></script>
+</html>

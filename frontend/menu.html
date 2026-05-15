@@ -6,44 +6,74 @@
     <title>Menu - Ponto</title>
     <link rel="stylesheet" href="../style/menu.css">
 </head>
+
 <body>
-    <nav class="menu">
-        <div class="container">
-            <div class="logo-container">
-                <img src="../assets/logo.avif" alt="Logo do Sistema de Ponto">
-                <h1>Sistema de Ponto</h1>
+
+<nav class="menu">
+
+    <div class="container">
+        <!-- MENU -->
+        <ul>
+
+            <li>
+                <a href="../frontend/ponto_funcionarios.html">
+                    <span>👨‍💼</span>
+                    Funcionários
+                </a>
+            </li>
+
+            <li>
+                <a href="../frontend/ponto_oficineiros.html">
+                    <span>🛠️</span>
+                    Oficineiros
+                </a>
+            </li>
+
+            <li>
+                <a href="../frontend/dashboard.html">
+                    <span>📊</span>
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="../frontend/cadastro_usuarios_admin.html">
+                    <span>👤</span>
+                    Cadastro de Usuários
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- BOTÃO SAIR -->
+        <button class="logout-button">
+            Sair
+        </button>
+
+    </div>
+
+</nav>
+
+<div class="main-content">
+
+    <!-- LOGO + USUÁRIO -->
+        <div class="logo-container">
+
+            <img src="../assets/logo.avif"
+                 alt="Logo do Sistema de Ponto">
+
+            <h1>Sistema de Ponto</h1>
+
+            <span id="usuario"></span>
+            <p>Bem-vindo, <strong id="usuarioLogadoNome"></strong></p>
+            
+            <div class="ponto-auto">
+              <button class="cadastro-ponto">Inicio Expediente</button>
+              <button class="finalizar-ponto">Fim Expediente</button>
             </div>
-
-            <ul>
-                <li>
-                    <a href="../frontend/ponto_funcionarios.html">
-                        <span>👨‍💼</span>
-                        Funcionários
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../frontend/ponto_oficineiros.html">
-                        <span>🛠️</span>
-                        Oficineiros
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../frontend/adicionar_planilha.html">
-                        <span>📊</span>
-                        Adicionar Planilha
-                    </a>
-                </li>
-
-                <li>
-                    <a href="../frontend/cadastro_usuarios.html">
-                        <span>👤</span>
-                        Cadastro de Usuários
-                    </a>
-                </li>
-            </ul>
+     
         </div>
-    </nav>
+</div>
 </body>
+<script src="../backend/menu.js" defer></script>
 </html>
