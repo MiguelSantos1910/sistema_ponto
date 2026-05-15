@@ -1,0 +1,333 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+}
+
+/* CONTAINER PRINCIPAL */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 25px;
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0c2d57;
+}
+
+/* CARDS RESUMO */
+
+.cards-resumo {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+/* Destaque visual nos cards resumo */
+
+.cards-resumo .card {
+
+    border-left: 6px solid #0c2d57;
+}
+
+/* CARDS PRINCIPAIS */
+
+.cards-principais {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 20px;
+}
+
+/* CARD GERAL */
+
+.card {
+
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    padding: 18px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+}
+
+/* Hover */
+
+.card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* TÍTULOS */
+
+.card h2 {
+
+    color: #0c2d57;
+
+    margin-bottom: 12px;
+
+    font-size: 18px;
+
+    border-bottom: 2px solid #eaeaea;
+
+    padding-bottom: 5px;
+}
+
+.card h3 {
+
+    color: #1f4e8c;
+
+    margin-bottom: 8px;
+}
+
+/* TAMANHOS */
+
+.pequeno {
+    min-height: 100px;
+}
+
+.medio {
+    min-height: 180px;
+}
+
+.grande {
+    min-height: 260px;
+}
+
+/* TEXTOS */
+
+.card p {
+
+    font-size: 16px;
+
+    color: #333;
+
+    margin-bottom: 6px;
+}
+
+.card strong {
+
+    color: #0c2d57;
+}
+
+/* NÚMEROS GRANDES (cards resumo) */
+
+.cards-resumo p {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #0c2d57;
+}
+
+/* HISTÓRICO (TABELA) */
+
+.historico {
+
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 10px;
+}
+
+/* CABEÇALHO */
+
+thead {
+
+    background-color: #0c2d57;
+
+    color: white;
+}
+
+th {
+
+    padding: 10px;
+
+    font-size: 14px;
+
+    text-align: center;
+}
+
+/* LINHAS */
+
+td {
+
+    padding: 10px;
+
+    text-align: center;
+
+    font-size: 14px;
+
+    border-bottom:
+        1px solid #ddd;
+}
+
+/* Linhas alternadas */
+
+tbody tr:nth-child(even) {
+
+    background-color: #f9f9f9;
+}
+
+/* Hover tabela */
+
+tbody tr:hover {
+
+    background-color: #e8f0ff;
+}
+
+/* BANCO DE HORAS */
+
+.banco-horas p {
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+}
+
+/* RESUMO DO DIA */
+
+.resumo-dia p {
+
+    margin-bottom: 8px;
+}
+
+/* ALERTAS */
+
+.alertas ul {
+
+    list-style: none;
+}
+
+.alertas li {
+
+    background-color: #fff3cd;
+
+    color: #856404;
+
+    padding: 10px;
+    
+    margin: 5px;
+
+    border-radius: 6px;
+
+    font-size: 14px;
+}
+
+/* GRÁFICO */
+
+.grafico {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 200px;
+
+    color: #777;
+
+    font-style: italic;
+
+    border: 2px dashed #ccc;
+
+    border-radius: 10px;
+}
+
+/* BOTÃO */
+
+button {
+    display: flex;
+  
+    justify-content: center;
+  
+    width: 70%;
+
+    margin-top: 15px;
+  
+    margin: 15px auto;
+
+    padding: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #0c2d57,
+        #1f4e8c
+    );
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* Hover botão */
+
+button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 768px) {
+
+    .container {
+
+        padding: 15px;
+    }
+
+    h1 {
+
+        font-size: 22px;
+    }
+
+}

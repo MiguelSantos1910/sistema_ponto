@@ -1,111 +1,122 @@
-/* Reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
-}
-
-/* Menu */
+/* MENU LATERAL */
 .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
     background-color: #0c2d57;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
     padding: 20px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
 }
 
-/* Container */
+/* Container interno */
 .container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 0 20px;
-
-    display: flex;
-    flex-direction: column; /* empilha logo + menu */
-    align-items: flex-start;
-    gap: 20px; /* espaço entre logo e menu */
-}
-
-/* Logo e imagem lado a lado */
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 255px; /* espaço entre logo e texto */
-}
-
-.logo-container img {
-    width: 150px;
-    height: 150px;
-    object-fit: contain;
-    border-radius: 6px; 
-}
-
-.logo-container h1 {
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Lista de links */
-.menu ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    width: 100%;
-}
-
-/* Links */
-.menu ul li a {
-    text-decoration: none;
-    color: #ffffff;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding: 0 15px;
+    gap: 50px;
+}
 
-    gap: 6px;
-    padding: 10px 14px;
+/* Logo no topo */
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+/* Logo */
+.logo-container img {
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    border-radius: 2px; 
+}
+
+/* Texto logo */
+.logo-container h1 {
+    color: #0c0c0c;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* LISTA VERTICAL */
+.menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+/* LINKS */
+.menu ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
     border-radius: 8px;
-
     transition: all 0.3s ease;
 }
 
 /* Ícones */
 .menu ul li a span {
-    font-size: 22px;
-}
-
-/* Texto */
-.menu ul li a {
-    font-size: 14px;
+    font-size: 20px;
 }
 
 /* Hover */
 .menu ul li a:hover {
     background-color: #1f4e8c;
-    transform: translateY(-2px);
+    transform: translateX(4px);
 }
 
-/* Responsivo */
-@media (max-width: 768px) {
-    .logo-container {
-        flex-direction: column;
-        text-align: center;
-    }
+/* BOTÃO SAIR */
+.logout-button {
+    margin-top: auto; /* empurra para o final */
+    width: 100%;
+    padding: 10px;
+    background: linear-gradient(
+        135deg,
+        #b22222,
+        #e63946
+    );
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
-    .menu ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
+.ponto-auto {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* espaço entre os botões */
+}
 
-    .menu ul li a {
-        width: 100%;
-        text-align: center;
-    }
+.ponto-auto button:first-child {
+    background-color: #4CAF50; /* verde */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.ponto-auto button:last-child {
+    background-color: #f44336; /* vermelho */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
 }

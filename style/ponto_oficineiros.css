@@ -1,0 +1,253 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+    background: linear-gradient(
+        135deg,
+        #0c2d57,
+        #1f4e8c
+    );
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding: 40px 15px;
+}
+
+/* CONTAINER */
+.container {
+
+    width: 100%;
+    max-width: 750px;
+
+    background: #ffffff;
+
+    padding: 35px 30px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.25);
+
+    animation: fadeIn 0.5s ease;
+
+    /* IMPORTANTE: força layout vertical */
+    display: flex;
+    flex-direction: column;
+}
+
+/* TÍTULO EM CIMA */
+h1 {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    color: white;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    border-bottom: 2px solid #e5e5e5;
+
+    padding-bottom: 10px;
+}
+
+/* FORMULÁRIO */
+form {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 18px 22px;
+}
+
+/* CAMPOS GRANDES */
+.full {
+    grid-column: span 2;
+}
+
+/* LABEL */
+label {
+
+    font-weight: 600;
+
+    margin-bottom: 6px;
+
+    color: #333;
+
+    display: block;
+
+    font-size: 14px;
+}
+
+/* INPUTS */
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 11px 13px;
+
+    border-radius: 10px;
+
+    border: 1px solid #ccc;
+
+    font-size: 14px;
+
+    transition: 0.25s;
+
+    background-color: #fafafa;
+}
+
+/* HOVER INPUT */
+input:hover,
+select:hover,
+textarea:hover {
+
+    border-color: #1f4e8c;
+}
+
+/* FOCO INPUT */
+input:focus,
+select:focus,
+textarea:focus {
+
+    border-color: #1f4e8c;
+
+    outline: none;
+
+    background-color: #ffffff;
+
+    box-shadow:
+        0 0 8px rgba(31,78,140,0.25);
+}
+
+/* TEXTAREA */
+textarea {
+
+    resize: vertical;
+
+    min-height: 90px;
+}
+
+/* BOTÃO */
+button {
+
+    grid-column: span 2;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #0c2d57,
+        #1f4e8c
+    );
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    letter-spacing: 0.5px;
+
+    transition: 0.3s;
+}
+
+/* HOVER BOTÃO */
+button:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.25);
+}
+
+/* BOTÃO ATIVO */
+button:active {
+
+    transform: translateY(0);
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* INPUT FILE */
+input[type="file"] {
+
+    background: #f0f2f5;
+
+    padding: 8px;
+
+    border-radius: 8px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 700px) {
+
+    form {
+
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+
+        grid-column: span 1;
+    }
+
+    .container {
+
+        padding: 25px 20px;
+    }
+
+    h1 {
+
+        font-size: 24px;
+    }
+
+}
+
+/* ANIMAÇÃO */
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}

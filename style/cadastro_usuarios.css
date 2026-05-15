@@ -78,6 +78,15 @@ body {
     cursor: pointer;
     transition: 0.3s;
 }
+a{
+    color: blue;
+    text-align: center;
+    padding: 10px;
+}
+
+a:hover{
+    color: black;
+}
 
 .cadastro-form button:hover {
     background-color: #1f4e8c;
