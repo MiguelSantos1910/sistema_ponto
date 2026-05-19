@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualização dos Oficineiros</title>
+    <link rel="stylesheet" href="../style/visualizar_oficineiros.css" />
+</head>
+<body>
+    <h1>Ponto dos Oficineiros</h1>
+
+    <div class="container">
+        <div class="card">
+            <div class="topo">
+                <div class="total-registros">
+                    Total de Registros:
+                    <span id="total-registros">0</span>
+                </div>
+
+                <button
+                    class="btn-voltar"
+                    type="button"
+                    onclick="window.location.href='../frontend/menu.html'"
+                >
+                    ← Voltar ao Menu
+                </button>
+            </div>
+
+            <div class="tabela-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Matrícula</th>
+                            <th>Atividade</th>
+                            <th>Data</th>
+                            <th>Entrada</th>
+                            <th>Intervalo</th>
+                            <th>Retorno</th>
+                            <th>Situação</th>
+                            <th>Saída</th>
+                            <th>Observação</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabela-oficineiros">
+                        <!-- Dados carregados via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../backend/visualizar_oficineiros.js"></script>
+</body>
+</html>

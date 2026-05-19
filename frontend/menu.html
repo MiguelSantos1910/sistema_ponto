@@ -37,9 +37,16 @@
             </li>
 
             <li>
-                <a href="../frontend/cadastro_usuarios_admin.html">
+                <a href="../frontend/cadastro_usuarios.html">
                     <span>👤</span>
                     Cadastro de Usuários
+                </a>
+            </li>
+
+            <li>
+                <a href="../frontend/visualizar_oficineiros.html">
+                    <span>📋</span>
+                    Visualizar Oficineiros
                 </a>
             </li>
 
@@ -71,9 +78,17 @@
               <button class="cadastro-ponto">Inicio Expediente</button>
               <button class="finalizar-ponto">Fim Expediente</button>
             </div>
-     
+
+            <div class="backup-container">
+                <button type="backup" onclick="exportarBackup()">Exportar Backup</button>
+                <input type="file" id="arquivoBackup" accept=".json" onchange="importarBackup(event)">
+            </div>
+        
         </div>
+
 </div>
 </body>
 <script src="../backend/menu.js" defer></script>
+<script src="../backend/backeup_sistema.js"></script>
+<script src="../backend/importar_backup.js"></script>
 </html>

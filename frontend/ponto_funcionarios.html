@@ -70,7 +70,7 @@
 
 <div class="full">
 <label for="arquivo">Carregar planilha (EXCEL):</label>
-<input type="file" id="arquivo" name="arquivo" required>
+<input type="file" id="arquivo" name="arquivo" accept=".xlsx, .xls">
 </div>
   
 <button type="button">
@@ -83,5 +83,7 @@ Voltar
 </form>
 
 </div>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="../backend/leitor_csv.js"></script>
 </body>
 </html>
