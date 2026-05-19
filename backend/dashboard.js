@@ -2,6 +2,7 @@ const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
 
 if (!usuarioLogado) {
     alert("Nenhum usuário logado!");
+    localStorage.removeItem("usuarioLogado");
     window.location.href = "../frontend/login.html";
 }
 
