@@ -1,201 +1,479 @@
-# ⏱️ Sistema de Ponto Desktop com Electron
+# ============================================================
+# README - Sistema de Ponto com Electron
+# ============================================================
+#
+# Este documento explica, passo a passo, como transformar
+# o Sistema de Ponto (HTML, CSS e JavaScript) em um aplicativo
+# executável para Windows usando Electron.
+#
+# Todo o conteúdo deste arquivo está comentado para facilitar
+# o entendimento.
+#
+# ============================================================
 
-Este projeto transforma um sistema de ponto feito em **HTML, CSS e JavaScript** em um aplicativo desktop (.exe) utilizando Electron.
 
----
 
-## 📌 Objetivo
+# ============================================================
+# VISÃO GERAL DO PROJETO
+# ============================================================
+#
+# O Sistema de Ponto foi desenvolvido utilizando:
+#
+# - HTML5
+# - CSS3
+# - JavaScript
+# - LocalStorage
+# - Electron
+#
+# Funcionalidades disponíveis:
+#
+# - Cadastro de usuários
+# - Login e logout
+# - Registro automático de entrada e saída
+# - Cadastro de funcionários
+# - Cadastro de oficineiros
+# - Importação de planilhas Excel
+# - Exportação e importação de backup JSON
+# - Geração de relatórios em PDF
+# - Visualização, edição e exclusão de registros
+#
+# O Electron empacota todo o sistema em um executável (.exe),
+# permitindo a instalação em computadores Windows sem depender
+# de um navegador.
+#
+# ============================================================
 
-Permitir que um sistema web simples rode como aplicativo desktop, com suporte a:
 
-* Registro de entrada/saída
-* Funcionamento offline
-* Armazenamento local
-* Possível exportação de dados
 
----
+# ============================================================
+# ESTRUTURA DO PROJETO
+# ============================================================
+#
+# sistema-ponto/
+# │
+# ├── frontend/                  # Arquivos HTML
+# │   ├── login.html
+# │   ├── menu.html
+# │   ├── dashboard.html
+# │   ├── ponto_funcionarios.html
+# │   ├── ponto_oficineiros.html
+# │   ├── visualizar_funcionarios.html
+# │   ├── visualizar_oficineiros.html
+# │   └── cadastro_usuarios.html
+# │
+# ├── backend/                   # Arquivos JavaScript
+# │   ├── login.js
+# │   ├── menu.js
+# │   ├── ponto_funcionarios.js
+# │   ├── ponto_oficineiros.js
+# │   ├── visualizar_funcionarios.js
+# │   ├── visualizar_oficineiros.js
+# │   ├── leitor_csv.js
+# │   ├── backup_sistema.js
+# │   ├── importar_backup.js
+# │   └── gerador_relatorioPDF.js
+# │
+# ├── style/                     # Arquivos CSS
+# │   ├── login.css
+# │   ├── menu.css
+# │   ├── ponto_funcionarios.css
+# │   ├── ponto_oficineiros.css
+# │   ├── visualizar_funcionarios.css
+# │   └── visualizar_oficineiros.css
+# │
+# ├── assets/                    # Imagens, logo e ícones
+# │   ├── logo.avif
+# │   └── icon.ico
+# │
+# ├── main.js                    # Arquivo principal do Electron
+# ├── package.json               # Configuração do projeto
+# └── README.md                  # Este arquivo
+#
+# ============================================================
 
-## 🚀 Tecnologias utilizadas
 
-* HTML5
-* CSS3
-* JavaScript
-* Node.js
-* Electron
 
----
+# ============================================================
+# PRÉ-REQUISITOS
+# ============================================================
+#
+# Antes de iniciar, é necessário instalar:
+#
+# 1. Node.js
+# 2. NPM (já incluído com o Node.js)
+#
+# Site oficial:
+# https://nodejs.org
+#
+# ============================================================
 
-## 📁 Estrutura do Projeto
 
-```
-ponto-app/
-├── index.html
-├── style.css
-├── script.js
-├── main.js
-├── package.json
-```
 
----
+# ============================================================
+# INICIALIZAR O PROJETO
+# ============================================================
+#
+# O comando abaixo cria o arquivo package.json automaticamente.
+#
+# npm init -y
+#
+# Explicação:
+# - npm init      -> inicializa um projeto Node.js
+# - -y            -> aceita todas as configurações padrão
+#
+# ============================================================
 
-## ⚙️ Instalação
 
-### 1. Instalar o Node.js
 
-Baixe e instale:
-https://nodejs.org
+# ============================================================
+# INSTALAR O ELECTRON
+# ============================================================
+#
+# npm install electron --save-dev
+#
+# Explicação:
+# - npm install        -> instala um pacote
+# - electron          -> framework para criar apps desktop
+# - --save-dev        -> adiciona em devDependencies
+#
+# ============================================================
 
-Verifique no terminal:
 
-```bash
-node -v
-npm -v
-```
 
----
+# ============================================================
+# INSTALAR O ELECTRON BUILDER
+# ============================================================
+#
+# npm install electron-builder --save-dev
+#
+# Explicação:
+# - electron-builder -> gera instaladores (.exe, .deb, .AppImage)
+#
+# ============================================================
 
-### 2. Inicializar o projeto
 
-Dentro da pasta do projeto:
 
-```bash
-npm init -y
-```
+# ============================================================
+# ARQUIVO main.js
+# ============================================================
+#
+# Este arquivo é o ponto de entrada do aplicativo.
+# Ele cria a janela principal e carrega a tela de login.
+#
+# ------------------------------------------------------------
+# Código:
+# ------------------------------------------------------------
 
----
-
-### 3. Instalar o Electron
-
-```bash
-npm install electron --save-dev
-```
-
----
-
-## 🧠 Configuração
-
-### 📄 main.js
-
-Arquivo principal do Electron:
-
-```js
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow } = require("electron");
+# Importa:
+# - app: controla o ciclo de vida da aplicação
+# - BrowserWindow: cria janelas
 
 function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false
-    }
-  });
+    # Função responsável por criar a janela principal
 
-  win.loadFile('index.html');
+    const win = new BrowserWindow({
+        width: 1400,
+        # Largura inicial da janela
+
+        height: 900,
+        # Altura inicial da janela
+
+        minWidth: 1000,
+        # Largura mínima permitida
+
+        minHeight: 700,
+        # Altura mínima permitida
+
+        autoHideMenuBar: true,
+        # Oculta a barra de menu padrão
+
+        icon: "assets/icon.ico",
+        # Define o ícone do aplicativo
+
+        webPreferences: {
+            nodeIntegration: false,
+            # Impede acesso direto ao Node.js no frontend
+
+            contextIsolation: true
+            # Isola o contexto por segurança
+        }
+    });
+
+    win.loadFile("frontend/login.html");
+    # Carrega a página inicial
 }
 
-app.whenReady().then(createWindow);
-```
+app.whenReady().then(() => {
+    # Executa quando o Electron estiver pronto
 
----
+    createWindow();
 
-### 📦 package.json
+    app.on("activate", () => {
+        # No macOS, recria a janela ao clicar no ícone do app
 
-Edite o arquivo para incluir:
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createWindow();
+        }
+    });
+});
 
-```json
+app.on("window-all-closed", () => {
+    # Fecha o aplicativo quando todas as janelas forem encerradas
+
+    if (process.platform !== "darwin") {
+        # No macOS, é comum manter o app aberto
+        app.quit();
+    }
+});
+
+# ============================================================
+
+
+
+# ============================================================
+# ARQUIVO package.json
+# ============================================================
+#
+# Este arquivo configura:
+# - Nome do projeto
+# - Scripts
+# - Dependências
+# - Geração do instalador
+#
+# ------------------------------------------------------------
+# Código:
+# ------------------------------------------------------------
+
 {
-  "name": "ponto-app",
+  "name": "sistema-ponto",
+  # Nome interno do projeto
+
   "version": "1.0.0",
+  # Versão atual
+
+  "description": "Sistema de Ponto com Electron",
+  # Descrição do aplicativo
+
   "main": "main.js",
+  # Arquivo principal
+
+  "author": "Miguel Santos",
+  # Autor do projeto
+
   "scripts": {
     "start": "electron .",
+    # Executa o projeto em modo desenvolvimento
+
     "build": "electron-builder"
+    # Gera o instalador
+  },
+
+  "devDependencies": {
+    "electron": "^37.0.0",
+    # Dependência do Electron
+
+    "electron-builder": "^26.0.0"
+    # Dependência do empacotador
+  },
+
+  "build": {
+    "appId": "com.sistemaponto.app",
+    # Identificador único da aplicação
+
+    "productName": "Sistema de Ponto",
+    # Nome exibido ao usuário
+
+    "directories": {
+      "output": "dist"
+      # Pasta onde será gerado o instalador
+    },
+
+    "files": [
+      "frontend/**/*",
+      # Inclui todos os HTML
+
+      "backend/**/*",
+      # Inclui todos os JavaScript
+
+      "style/**/*",
+      # Inclui todos os CSS
+
+      "assets/**/*",
+      # Inclui imagens e ícones
+
+      "main.js",
+      # Inclui o arquivo principal
+
+      "package.json"
+      # Inclui a configuração
+    ],
+
+    "win": {
+      "target": ["nsis"],
+      # Gera instalador .exe
+
+      "icon": "assets/icon.ico"
+      # Ícone do executável
+    }
   }
 }
-```
 
----
+# ============================================================
 
-## ▶️ Executando o projeto
 
-```bash
-npm start
-```
 
-Isso abrirá o sistema como um aplicativo desktop.
+# ============================================================
+# EXECUTAR O PROJETO
+# ============================================================
+#
+# npm start
+#
+# Explicação:
+# - Executa o script "start" definido no package.json
+# - Abre o aplicativo em modo desenvolvimento
+#
+# ============================================================
 
----
 
-## 🏗️ Gerando o .exe
 
-### 1. Instalar o builder
+# ============================================================
+# GERAR O INSTALADOR
+# ============================================================
+#
+# npm run build
+#
+# Explicação:
+# - Executa o script "build"
+# - Gera o instalador para Windows
+#
+# ============================================================
 
-```bash
-npm install electron-builder --save-dev
-```
 
----
 
-### 2. Configurar build no package.json
+# ============================================================
+# ARQUIVOS GERADOS
+# ============================================================
+#
+# Após a compilação, a pasta dist/ será criada:
+#
+# dist/
+# ├── Sistema de Ponto Setup 1.0.0.exe
+# └── win-unpacked/
+#
+# O arquivo .exe é o instalador que pode ser distribuído.
+#
+# ============================================================
 
-```json
-"build": {
-  "appId": "com.ponto.app",
-  "win": {
-    "target": "nsis"
-  }
-}
-```
 
----
 
-### 3. Gerar o executável
+# ============================================================
+# ARMAZENAMENTO DE DADOS
+# ============================================================
+#
+# O sistema utiliza localStorage para armazenar:
+#
+# - usuarios
+# - usuarioLogado
+# - funcionarios
+# - oficineiros
+#
+# Os dados ficam salvos localmente no computador do usuário.
+#
+# ============================================================
 
-```bash
-npm run build
-```
 
----
 
-### 📂 Saída
+# ============================================================
+# BACKUP DO SISTEMA
+# ============================================================
+#
+# O sistema permite:
+#
+# - Exportar backup em JSON
+# - Importar backup em JSON
+#
+# Isso garante recuperação de dados em caso de perda.
+#
+# ============================================================
 
-O executável será gerado em:
 
-```
-dist/
-```
 
-Exemplo:
+# ============================================================
+# IMPORTAÇÃO DE PLANILHAS
+# ============================================================
+#
+# Utiliza a biblioteca SheetJS.
+#
+# Formatos aceitos:
+#
+# - .xlsx
+# - .xls
+#
+# ============================================================
 
-```
-Ponto App Setup.exe
-```
 
----
 
-## 💾 Armazenamento de Dados
+# ============================================================
+# RELATÓRIOS EM PDF
+# ============================================================
+#
+# Utiliza a biblioteca jsPDF.
+#
+# Relatórios disponíveis:
+#
+# - Funcionários
+# - Oficineiros
+#
+# ============================================================
 
-### Opções:
 
-* localStorage 
-* Arquivo JSON local
 
----
+# ============================================================
+# TECNOLOGIAS UTILIZADAS
+# ============================================================
+#
+# - HTML5
+# - CSS3
+# - JavaScript ES6
+# - LocalStorage
+# - Electron
+# - Electron Builder
+# - SheetJS
+# - jsPDF
+#
+# ============================================================
 
-## 📤 Exportação de Dados (Exemplo CSV)
 
-```js
-const fs = require('fs');
 
-fs.writeFileSync('pontos.csv', 'dados aqui');
-```
+# ============================================================
+# MELHORIAS FUTURAS
+# ============================================================
+#
+# - Banco de dados SQLite
+# - Criptografia de senhas
+# - Controle de permissões
+# - Atualizações automáticas
+# - Integração com nuvem
+#
+# ============================================================
 
----
 
-## 🔥 Possíveis melhorias
 
-* Banco de dados SQLite
-* Exportação automática para Excel/CSV
-* Integração com API
-* Inicialização automática com o Windows
+# ============================================================
+# AUTOR
+# ============================================================
+#
+# Miguel Santos
+#
+# ============================================================
+
+
+
+# ============================================================
+# LICENÇA
+# ============================================================
+#
+# Projeto de uso interno para controle de ponto da instituição.
+#
+# ============================================================
