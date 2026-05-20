@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding: 30px;
+    color: #333;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* ==========================
+   CABEÇALHO
+========================== */
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.total-registros {
+    background: linear-gradient(135deg, #4facfe, #00c6ff);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.35);
+}
+
+.btn-voltar {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 22px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-voltar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(102, 126, 234, 0.4);
+}
+
+.btn-voltar:active {
+    transform: translateY(0);
+}
+
+/* ==========================
+   TABELA
+========================== */
+
+.tabela-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+thead {
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    color: #ffffff;
+}
+
+th {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e9eef5;
+    font-size: 0.92rem;
+    vertical-align: top;
+    line-height: 1.5;
+}
+
+tbody tr:nth-child(even) {
+    background: #f8fbff;
+}
+
+tbody tr:hover {
+    background: #eef6ff;
+    transition: background 0.2s ease;
+}
+
+/* ==========================
+   BADGES
+========================== */
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.badge.ativo {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge.inativo {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Situação para crédito/débito (caso utilize) */
+.badge.credito {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge.debito {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+/* ==========================
+   BOTÕES DE AÇÃO
+========================== */
+
+.btn-editar,
+.btn-excluir {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    margin-right: 6px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+.btn-editar {
+    background: linear-gradient(135deg, #4facfe, #00c6ff);
+    box-shadow: 0 3px 8px rgba(79, 172, 254, 0.3);
+}
+
+.btn-editar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(79, 172, 254, 0.4);
+}
+
+.btn-excluir {
+    background: linear-gradient(135deg, #ff6b6b, #f44336);
+    box-shadow: 0 3px 8px rgba(244, 67, 54, 0.3);
+}
+
+.btn-excluir:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
+}
+
+/* ==========================
+   SEM DADOS
+========================== */
+
+.sem-dados {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* ==========================
+   MODAL
+========================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 100%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 24px;
+    color: #1e3c72;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* ==========================
+   FORMULÁRIO DO MODAL
+========================== */
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-content label {
+    font-weight: bold;
+    color: #1e3c72;
+    margin-top: 4px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.modal-content input,
+.modal-content select,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dbe4f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #333;
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus,
+.modal-content textarea:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.15);
+}
+
+.modal-content textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ==========================
+   BOTÕES DO MODAL
+========================== */
+
+.modal-botoes {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.btn-salvar,
+.btn-cancelar {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: all 0.25s ease;
+    min-width: 120px;
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    box-shadow: 0 4px 12px rgba(67, 233, 123, 0.3);
+}
+
+.btn-salvar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(67, 233, 123, 0.4);
+}
+
+.btn-cancelar {
+    background: linear-gradient(135deg, #ff6b6b, #f44336);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.btn-cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(244, 67, 54, 0.4);
+}
+
+/* ==========================
+   ANIMAÇÃO
+========================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .topo {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .total-registros,
+    .btn-voltar {
+        width: 100%;
+        text-align: center;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+
+    .btn-editar,
+    .btn-excluir {
+        width: 100%;
+        margin-right: 0;
+        display: block;
+    }
+
+    /* Modal */
+    .modal {
+        padding: 10px;
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 16px;
+        max-height: none;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .modal-content label {
+        font-size: 0.9rem;
+    }
+
+    .modal-content input,
+    .modal-content select,
+    .modal-content textarea {
+        font-size: 16px; /* evita zoom automático no iOS */
+        padding: 12px;
+    }
+
+    .modal-content textarea {
+        min-height: 90px;
+    }
+
+    .modal-botoes {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-salvar,
+    .btn-cancelar {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .modal-content {
+        padding: 16px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3rem;
+    }
+
+    .total-registros {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+    }
+
+    .btn-voltar {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}

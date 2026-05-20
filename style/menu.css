@@ -1,122 +1,476 @@
-/* MENU LATERAL */
+/* ==========================================
+   RESET
+========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #f4f7fb, #e9eff8);
+    color: #333;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   MENU LATERAL
+========================================== */
 .menu {
     position: fixed;
     top: 0;
     left: 0;
-    width: 260px;
+    width: 280px;
     height: 100vh;
-    background-color: #0c2d57;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    background: linear-gradient(180deg, #0c2d57, #133f77);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.12);
     padding: 20px 0;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+/* Scroll customizado */
+.menu::-webkit-scrollbar {
+    width: 6px;
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+/* ==========================================
+   CONTAINER INTERNO DO MENU
+========================================== */
+.menu .container {
     display: flex;
     flex-direction: column;
+    min-height: calc(100vh - 40px);
+    padding: 0 18px;
+    gap: 20px;
 }
 
-/* Container interno */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 15px;
-    gap: 50px;
-}
-
-/* Logo no topo */
-.logo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-}
-
-/* Logo */
-.logo-container img {
-    width: 250px;
-    height: 250px;
-    object-fit: contain;
-    border-radius: 2px; 
-}
-
-/* Texto logo */
-.logo-container h1 {
-    color: #0c0c0c;
-    font-size: 25px;
-    font-weight: bold;
+/* ==========================================
+   CABEÇALHO DO MENU
+========================================== */
+.menu-header {
     text-align: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* LISTA VERTICAL */
+.menu-header h2 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================
+   LISTA DE NAVEGAÇÃO
+========================================== */
+.menu-lista,
 .menu ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 8px;
+    width: 100%;
+}
+
+.menu-lista li,
+.menu ul li {
+    width: 100%;
 }
 
 /* LINKS */
+.menu-lista li a,
 .menu ul li a {
     text-decoration: none;
     color: #ffffff;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 12px 14px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    padding: 14px 16px;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 /* Ícones */
+.icone,
 .menu ul li a span {
-    font-size: 20px;
+    font-size: 1.25rem;
+    min-width: 24px;
+    text-align: center;
 }
 
 /* Hover */
+.menu-lista li a:hover,
 .menu ul li a:hover {
-    background-color: #1f4e8c;
+    background: rgba(255, 255, 255, 0.12);
     transform: translateX(4px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
-/* BOTÃO SAIR */
-.logout-button {
-    margin-top: auto; /* empurra para o final */
-    width: 100%;
-    padding: 10px;
-    background: linear-gradient(
-        135deg,
-        #b22222,
-        #e63946
-    );
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
+/* Link ativo (opcional) */
+.menu-lista li a.ativo,
+.menu ul li a.ativo {
+    background: rgba(255, 255, 255, 0.16);
     font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
-.ponto-auto {
+/* ==========================================
+   RODAPÉ DO MENU
+========================================== */
+.menu-footer {
     margin-top: auto;
+    padding-top: 10px;
+}
+
+/* ==========================================
+   BOTÕES GERAIS
+========================================== */
+button,
+.btn-primary,
+.btn-secondary,
+.btn-success,
+.btn-danger,
+.btn-upload {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 18px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: all 0.25s ease;
+    text-align: center;
+}
+
+button:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.btn-success:hover,
+.btn-danger:hover,
+.btn-upload:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+button:active,
+.btn-primary:active,
+.btn-secondary:active,
+.btn-success:active,
+.btn-danger:active,
+.btn-upload:active {
+    transform: translateY(0);
+}
+
+/* ==========================================
+   BOTÃO SAIR
+========================================== */
+.logout-button {
+    width: 100%;
+    background: linear-gradient(135deg, #c62828, #e53935);
+    box-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
+}
+
+/* ==========================================
+   CONTEÚDO PRINCIPAL
+========================================== */
+.main-content {
+    margin-left: 280px;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   CARD PRINCIPAL
+========================================== */
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   LOGO E BOAS-VINDAS
+========================================== */
+.logo-container {
     display: flex;
-    flex-direction: row;
-    gap: 10px; /* espaço entre os botões */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.ponto-auto button:first-child {
-    background-color: #4CAF50; /* verde */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
+.logo-container img,
+.logo {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
-.ponto-auto button:last-child {
-    background-color: #f44336; /* vermelho */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
+.logo-container h1 {
+    color: #0c2d57;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.boas-vindas,
+.logo-container p {
+    font-size: 1.05rem;
+    color: #555;
+}
+
+#usuarioLogadoNome {
+    color: #0c2d57;
+    font-weight: bold;
+}
+
+/* ==========================================
+   STATUS CARDS
+========================================== */
+.status-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.status-card {
+    background: linear-gradient(135deg, #f8fbff, #eef5ff);
+    border: 1px solid #dbe8f7;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.status-icon {
+    font-size: 2rem;
+}
+
+.status-card h3 {
+    font-size: 0.95rem;
+    color: #0c2d57;
+    margin-bottom: 4px;
+}
+
+.status-card p {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ==========================================
+   SEÇÕES
+========================================== */
+.card-section {
+    margin-bottom: 30px;
+    padding: 24px;
+    border-radius: 18px;
+    background: #f8fbff;
+    border: 1px solid #e4edf8;
+}
+
+.card-section h2 {
+    font-size: 1.2rem;
+    color: #0c2d57;
+    margin-bottom: 18px;
+}
+
+/* ==========================================
+   GRUPOS DE BOTÕES
+========================================== */
+.ponto-auto,
+.relatorios-container,
+.backup-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* ==========================================
+   CORES DOS BOTÕES
+========================================== */
+.btn-primary,
+.cadastro-ponto {
+    background: linear-gradient(135deg, #43a047, #66bb6a);
+}
+
+.btn-danger,
+.finalizar-ponto {
+    background: linear-gradient(135deg, #e53935, #ef5350);
+}
+
+.btn-secondary,
+.relatorios-container button {
+    background: linear-gradient(135deg, #0d6efd, #4dabf7);
+}
+
+.btn-success,
+.backup-container button {
+    background: linear-gradient(135deg, #00a86b, #2ecc71);
+}
+
+.btn-upload {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #6f42c1, #9b6dff);
+    min-width: 180px;
+}
+
+/* ==========================================
+   INPUT FILE
+========================================== */
+.backup-container input[type="file"] {
+    display: none;
+}
+
+/* ==========================================
+   RESPONSIVIDADE TABLET
+========================================== */
+@media (max-width: 992px) {
+    .menu {
+        width: 240px;
+    }
+
+    .main-content {
+        margin-left: 240px;
+        padding: 20px;
+    }
+
+    .dashboard-card {
+        padding: 25px;
+    }
+
+    .logo-container h1 {
+        font-size: 1.9rem;
+    }
+}
+
+/* ==========================================
+   RESPONSIVIDADE MOBILE
+========================================== */
+@media (max-width: 768px) {
+    .menu {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 15px 0;
+    }
+
+    .menu .container {
+        min-height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .dashboard-card {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .logo-container img,
+    .logo {
+        width: 160px;
+    }
+
+    .logo-container h1 {
+        font-size: 1.7rem;
+    }
+
+    .boas-vindas {
+        font-size: 0.95rem;
+    }
+
+    .status-container {
+        grid-template-columns: 1fr;
+    }
+
+    .ponto-auto,
+    .relatorios-container,
+    .backup-container,
+    .modal-botoes {
+        flex-direction: column;
+    }
+
+    .ponto-auto button,
+    .relatorios-container button,
+    .backup-container button,
+    .btn-upload {
+        width: 100%;
+    }
+
+    .menu-lista li a,
+    .menu ul li a {
+        padding: 12px 14px;
+        font-size: 0.9rem;
+    }
+
+    .menu-header h2 {
+        font-size: 1.15rem;
+    }
+
+    .card-section {
+        padding: 18px;
+    }
+}
+
+/* ==========================================
+   MOBILE PEQUENO
+========================================== */
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .dashboard-card {
+        padding: 16px;
+    }
+
+    .logo-container h1 {
+        font-size: 1.45rem;
+    }
+
+    .card-section h2 {
+        font-size: 1rem;
+    }
+
+    button,
+    .btn-primary,
+    .btn-secondary,
+    .btn-success,
+    .btn-danger,
+    .btn-upload {
+        padding: 11px 14px;
+        font-size: 0.9rem;
+    }
+
+    .status-card {
+        padding: 16px;
+    }
+
+    .status-icon {
+        font-size: 1.6rem;
+    }
 }

@@ -1,0 +1,105 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #0c2d57, #1f4e8c);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    padding: 20px;
+}
+
+/* Card */
+.card {
+    background-color: #ffffff;
+    max-width: 400px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Título */
+.card h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #0c2d57;
+}
+
+/* Form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.login-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Inputs */
+.login-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.login-form input:focus {
+    border-color: #1f4e8c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(31, 78, 140, 0.3);
+}
+
+/* Botão */
+.login-form button {
+    padding: 12px;
+    background-color: #0c2d57;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+a{
+    color: blue;
+    text-align: center;
+    padding: 10px;
+}
+
+a:hover{
+    color: black;
+}
+
+.login-form button:hover {
+    background-color: #1f4e8c;
+}
+
+/* Animação */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

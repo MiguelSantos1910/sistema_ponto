@@ -1,0 +1,527 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    padding: 30px;
+    color: #333;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   CONTAINER E CARD
+========================= */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.total-registros {
+    background: linear-gradient(135deg, #4facfe, #00c6ff);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.35);
+}
+
+.btn-voltar {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 22px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-voltar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(102, 126, 234, 0.4);
+}
+
+.btn-voltar:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   TABELA
+========================= */
+.tabela-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+}
+
+table {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+    background: #ffffff;
+}
+
+thead {
+    background: linear-gradient(135deg, #2a5298, #1e3c72);
+    color: #ffffff;
+}
+
+th {
+    padding: 14px 12px;
+    text-align: left;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #e9eef5;
+    font-size: 0.92rem;
+    vertical-align: top;
+    line-height: 1.5;
+}
+
+tbody tr:nth-child(even) {
+    background: #f8fbff;
+}
+
+tbody tr:hover {
+    background: #eef6ff;
+    transition: background 0.2s ease;
+}
+
+/* =========================
+   BADGES
+========================= */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.badge.ativo {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge.inativo {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* =========================
+   SEM DADOS
+========================= */
+.sem-dados {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+/* =========================
+   BOTÕES DA TABELA
+========================= */
+.btn-editar,
+.btn-excluir {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    margin-right: 6px;
+    margin-bottom: 4px;
+}
+
+.btn-editar {
+    background: linear-gradient(135deg, #4facfe, #00c6ff);
+    box-shadow: 0 3px 8px rgba(79, 172, 254, 0.3);
+}
+
+.btn-editar:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(79, 172, 254, 0.4);
+}
+
+.btn-excluir {
+    background: linear-gradient(135deg, #ff6b6b, #f44336);
+    box-shadow: 0 3px 8px rgba(244, 67, 54, 0.3);
+}
+
+.btn-excluir:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #ffffff;
+    width: 100%;
+    max-width: 650px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-content h2 {
+    margin-bottom: 25px;
+    color: #1e3c72;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+/* =========================
+   FORMULÁRIO DO MODAL
+========================= */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.modal-content label {
+    display: block;
+    font-weight: 600;
+    color: #1e3c72;
+    margin-bottom: 6px;
+    text-align: left;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.modal-content input,
+.modal-content textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dbe4f0;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #333;
+    background: #ffffff;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.modal-content input:focus,
+.modal-content textarea:focus {
+    border-color: #4facfe;
+    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.15);
+    background: #fcfeff;
+}
+
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+    color: #999;
+}
+
+.modal-content textarea {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+/* =========================
+   BOTÕES DO MODAL
+========================= */
+.modal-botoes {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-salvar,
+.btn-cancelar {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    min-width: 130px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: center;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
+    box-shadow: 0 4px 12px rgba(67, 233, 123, 0.3);
+}
+
+.btn-salvar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(67, 233, 123, 0.4);
+}
+
+.btn-cancelar {
+    background: linear-gradient(135deg, #ff6b6b, #f44336);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.btn-cancelar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(244, 67, 54, 0.4);
+}
+
+.btn-salvar:active,
+.btn-cancelar:active {
+    transform: translateY(0);
+}
+
+/* =========================
+   SCROLLBAR DO MODAL
+========================= */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* =========================
+   ANIMAÇÃO
+========================= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* =========================
+   RESPONSIVIDADE - TABLETS
+========================= */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        padding: 15px;
+        border-radius: 16px;
+    }
+
+    .topo {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .total-registros,
+    .btn-voltar {
+        width: 100%;
+        text-align: center;
+    }
+
+    th,
+    td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+
+    .modal {
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .modal-content {
+        max-width: 100%;
+        max-height: calc(100vh - 30px);
+        margin-top: 10px;
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .modal-content form {
+        gap: 12px;
+    }
+
+    .modal-content label {
+        font-size: 0.92rem;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+        padding: 11px 12px;
+        font-size: 0.92rem;
+    }
+
+    .modal-content textarea {
+        min-height: 90px;
+    }
+
+    .modal-botoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .btn-salvar,
+    .btn-cancelar,
+    .btn-editar,
+    .btn-excluir {
+        width: 100%;
+        min-width: auto;
+        margin-right: 0;
+    }
+}
+
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .modal {
+        padding: 10px;
+    }
+
+    .modal-content {
+        max-height: calc(100vh - 20px);
+        padding: 20px 16px;
+        border-radius: 14px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+    }
+
+    .modal-content label {
+        font-size: 0.9rem;
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+
+    .modal-content textarea {
+        min-height: 80px;
+    }
+
+    .btn-salvar,
+    .btn-cancelar {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+}
