@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Visualização dos Oficineiros</title>
-    <link rel="stylesheet" href="../style/visualizar_oficineiros.css" />
+    <title>Visualização do Ponto</title>
+    <link rel="stylesheet" href="../style/visualizar_funcionarios.css" />
 </head>
 <body>
-    <h1>Ponto dos Oficineiros</h1>
+    <h1>Visualização do Ponto</h1>
 
     <div class="container">
         <div class="card">
@@ -31,20 +31,16 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Matrícula</th>
-                            <th>Atividade</th>
-                            <th>Data</th>
-                            <th>Entrada</th>
-                            <th>Intervalo</th>
-                            <th>Retorno</th>
-                            <th>Situação</th>
-                            <th>Saída</th>
+                            <th>Crédito/Débito</th>
+                            <th>Total de Horas</th>
+                            <th>Transformação das Horas em Dias</th>
+                            <th>Previsão de Compensação</th>
                             <th>Observação</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
 
-                    <tbody id="tabela-oficineiros">
+                    <tbody id="tabela-funcionarios">
                         <!-- Dados carregados via JavaScript -->
                     </tbody>
                 </table>
@@ -52,16 +48,13 @@
         </div>
     </div>
 
-    <!-- MODAL DE EDIÇÃO -->
+    <!-- Modal de edição -->
     <div id="modal-edicao" class="modal hidden">
         <div class="modal-content">
             <h2>Editar Registro</h2>
 
             <form id="form-edicao">
-                <input
-                    type="hidden"
-                    id="indice-edicao"
-                />
+                <input type="hidden" id="indice-edicao" />
 
                 <label for="edit-nome">Nome</label>
                 <input
@@ -70,81 +63,39 @@
                     required
                 />
 
-                <label for="edit-matricula">Matrícula</label>
+                <label for="edit-credito">Crédito/Débito</label>
                 <input
                     type="text"
-                    id="edit-matricula"
+                    id="edit-credito"
                     required
                 />
 
-                <label for="edit-atividade">Atividade</label>
+                <label for="edit-total-horas">Total de Horas</label>
                 <input
                     type="text"
-                    id="edit-atividade"
+                    id="edit-total-horas"
                     required
                 />
 
-                <label for="edit-data">Data</label>
-                <input
-                    type="date"
-                    id="edit-data"
-                    required
-                />
-
-                <label for="edit-entrada">
-                    Hora de Entrada
+                <label for="edit-dias">
+                    Transformação em Dias
                 </label>
                 <input
-                    type="time"
-                    id="edit-entrada"
+                    type="text"
+                    id="edit-dias"
                     required
                 />
 
-                <label for="edit-intervalo">
-                    Hora de Intervalo
+                <label for="edit-previsao">
+                    Previsão de Compensação
                 </label>
                 <input
-                    type="time"
-                    id="edit-intervalo"
+                    type="text"
+                    id="edit-previsao"
                     required
                 />
 
-                <label for="edit-retorno">
-                    Hora de Retorno
-                </label>
-                <input
-                    type="time"
-                    id="edit-retorno"
-                    required
-                />
-
-                <label for="edit-situacao">
-                    Situação
-                </label>
-                <select
-                    id="edit-situacao"
-                    required
-                >
-                    <option value="ativo">
-                        Ativo
-                    </option>
-                    <option value="inativo">
-                        Inativo
-                    </option>
-                </select>
-
-                <label for="edit-saida">
-                    Hora de Saída
-                </label>
-                <input
-                    type="time"
-                    id="edit-saida"
-                    required
-                />
-
-                <label for="edit-observacao">
-                    Observação
-                </label>
+                <label for="edit-observacao">Observação</label>
                 <textarea
                     id="edit-observacao"
                     rows="4"
@@ -170,6 +121,6 @@
         </div>
     </div>
 
-    <script src="../backend/visualizar_oficineiros.js"></script>
+    <script src="../backend/visualizar_funcionarios.js"></script>
 </body>
 </html>

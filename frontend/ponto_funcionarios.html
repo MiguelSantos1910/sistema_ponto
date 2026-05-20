@@ -52,8 +52,8 @@
 <label for="situacao">Situação:</label>
 
 <select id="situacao" name="situacao" required>
-<option value="ativo">Ativo</option>
-<option value="inativo">Inativo</option>
+<option value="credito">Crédito</option>
+<option value="debito">Débito</option>
 </select>
 
 </div>
@@ -73,7 +73,7 @@
 <input type="file" id="arquivo" name="arquivo" accept=".xlsx, .xls">
 </div>
   
-<button type="button">
+<button type="submit">
 Registrar Ponto
 </button>
 
@@ -85,5 +85,6 @@ Voltar
 </div>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script src="../backend/leitor_csv.js"></script>
+<script src="../backend/ponto_funcionarios.js"></script>
 </body>
 </html>
