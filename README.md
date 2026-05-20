@@ -1,479 +1,267 @@
-# ============================================================
-# README - Sistema de Ponto com Electron
-# ============================================================
-#
-# Este documento explica, passo a passo, como transformar
-# o Sistema de Ponto (HTML, CSS e JavaScript) em um aplicativo
-# executável para Windows usando Electron.
-#
-# Todo o conteúdo deste arquivo está comentado para facilitar
-# o entendimento.
-#
-# ============================================================
+# 🕐 Sistema de Ponto
 
+> Aplicativo desktop para controle de ponto de funcionários e oficineiros, desenvolvido com Electron.
 
+---
 
-# ============================================================
-# VISÃO GERAL DO PROJETO
-# ============================================================
-#
-# O Sistema de Ponto foi desenvolvido utilizando:
-#
-# - HTML5
-# - CSS3
-# - JavaScript
-# - LocalStorage
-# - Electron
-#
-# Funcionalidades disponíveis:
-#
-# - Cadastro de usuários
-# - Login e logout
-# - Registro automático de entrada e saída
-# - Cadastro de funcionários
-# - Cadastro de oficineiros
-# - Importação de planilhas Excel
-# - Exportação e importação de backup JSON
-# - Geração de relatórios em PDF
-# - Visualização, edição e exclusão de registros
-#
-# O Electron empacota todo o sistema em um executável (.exe),
-# permitindo a instalação em computadores Windows sem depender
-# de um navegador.
-#
-# ============================================================
+## 📋 Índice
 
+- [Visão Geral](#visão-geral)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias](#tecnologias)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Pré-requisitos](#pré-requisitos)
+- [Instalação](#instalação)
+- [Como Usar](#como-usar)
+- [Armazenamento de Dados](#armazenamento-de-dados)
+- [Geração do Instalador](#geração-do-instalador)
+- [Melhorias Futuras](#melhorias-futuras)
+- [Autor](#autor)
 
+---
 
-# ============================================================
-# ESTRUTURA DO PROJETO
-# ============================================================
-#
-# sistema-ponto/
-# │
-# ├── frontend/                  # Arquivos HTML
-# │   ├── login.html
-# │   ├── menu.html
-# │   ├── dashboard.html
-# │   ├── ponto_funcionarios.html
-# │   ├── ponto_oficineiros.html
-# │   ├── visualizar_funcionarios.html
-# │   ├── visualizar_oficineiros.html
-# │   └── cadastro_usuarios.html
-# │
-# ├── backend/                   # Arquivos JavaScript
-# │   ├── login.js
-# │   ├── menu.js
-# │   ├── ponto_funcionarios.js
-# │   ├── ponto_oficineiros.js
-# │   ├── visualizar_funcionarios.js
-# │   ├── visualizar_oficineiros.js
-# │   ├── leitor_csv.js
-# │   ├── backup_sistema.js
-# │   ├── importar_backup.js
-# │   └── gerador_relatorioPDF.js
-# │
-# ├── style/                     # Arquivos CSS
-# │   ├── login.css
-# │   ├── menu.css
-# │   ├── ponto_funcionarios.css
-# │   ├── ponto_oficineiros.css
-# │   ├── visualizar_funcionarios.css
-# │   └── visualizar_oficineiros.css
-# │
-# ├── assets/                    # Imagens, logo e ícones
-# │   ├── logo.avif
-# │   └── icon.ico
-# │
-# ├── main.js                    # Arquivo principal do Electron
-# ├── package.json               # Configuração do projeto
-# └── README.md                  # Este arquivo
-#
-# ============================================================
+## Visão Geral
 
+O **Sistema de Ponto** é uma aplicação desktop desenvolvida com Electron que empacota uma interface HTML/CSS/JavaScript em um executável `.exe` para Windows. Os dados são armazenados localmente via `localStorage`, sem necessidade de servidor ou banco de dados externo.
 
+---
 
-# ============================================================
-# PRÉ-REQUISITOS
-# ============================================================
-#
-# Antes de iniciar, é necessário instalar:
-#
-# 1. Node.js
-# 2. NPM (já incluído com o Node.js)
-#
-# Site oficial:
-# https://nodejs.org
-#
-# ============================================================
+## Funcionalidades
 
+- 👤 Cadastro e autenticação de usuários
+- ⏱️ Registro automático de entrada e saída
+- 👷 Cadastro de funcionários e oficineiros
+- 📊 Importação de planilhas Excel (`.xlsx` / `.xls`)
+- 💾 Exportação e importação de backup em JSON
+- 📄 Geração de relatórios em PDF
+- 🔍 Visualização, edição e exclusão de registros
 
+---
 
-# ============================================================
-# INICIALIZAR O PROJETO
-# ============================================================
-#
-# O comando abaixo cria o arquivo package.json automaticamente.
-#
-# npm init -y
-#
-# Explicação:
-# - npm init      -> inicializa um projeto Node.js
-# - -y            -> aceita todas as configurações padrão
-#
-# ============================================================
+## Tecnologias
 
+| Tecnologia | Descrição |
+|---|---|
+| HTML5 / CSS3 / JS ES6 | Interface do usuário |
+| Electron | Empacotamento como app desktop |
+| Electron Builder | Geração do instalador `.exe` |
+| SheetJS | Importação de planilhas Excel |
+| jsPDF | Geração de relatórios em PDF |
+| LocalStorage | Armazenamento local de dados |
 
+---
 
-# ============================================================
-# INSTALAR O ELECTRON
-# ============================================================
-#
-# npm install electron --save-dev
-#
-# Explicação:
-# - npm install        -> instala um pacote
-# - electron          -> framework para criar apps desktop
-# - --save-dev        -> adiciona em devDependencies
-#
-# ============================================================
+## Estrutura do Projeto
 
+```
+sistema-ponto/
+│
+├── frontend/                        # Páginas HTML
+│   ├── login.html
+│   ├── menu.html
+│   ├── dashboard.html
+│   ├── ponto_funcionarios.html
+│   ├── ponto_oficineiros.html
+│   ├── visualizar_funcionarios.html
+│   ├── visualizar_oficineiros.html
+│   └── cadastro_usuarios.html
+│
+├── backend/                         # Scripts JavaScript
+│   ├── login.js
+│   ├── menu.js
+│   ├── ponto_funcionarios.js
+│   ├── ponto_oficineiros.js
+│   ├── visualizar_funcionarios.js
+│   ├── visualizar_oficineiros.js
+│   ├── leitor_csv.js
+│   ├── backup_sistema.js
+│   ├── importar_backup.js
+│   └── gerador_relatorioPDF.js
+│
+├── style/                           # Arquivos CSS
+│   ├── login.css
+│   ├── menu.css
+│   ├── ponto_funcionarios.css
+│   ├── ponto_oficineiros.css
+│   ├── visualizar_funcionarios.css
+│   └── visualizar_oficineiros.css
+│
+├── assets/                          # Imagens e ícones
+│   ├── logo.avif
+│   └── icon.ico
+│
+├── main.js                          # Ponto de entrada do Electron
+├── package.json                     # Configuração do projeto
+└── README.md
+```
 
+---
 
-# ============================================================
-# INSTALAR O ELECTRON BUILDER
-# ============================================================
-#
-# npm install electron-builder --save-dev
-#
-# Explicação:
-# - electron-builder -> gera instaladores (.exe, .deb, .AppImage)
-#
-# ============================================================
+## Pré-requisitos
 
+Antes de começar, instale o [Node.js](https://nodejs.org) (o NPM já vem incluído).
 
+---
 
-# ============================================================
-# ARQUIVO main.js
-# ============================================================
-#
-# Este arquivo é o ponto de entrada do aplicativo.
-# Ele cria a janela principal e carrega a tela de login.
-#
-# ------------------------------------------------------------
-# Código:
-# ------------------------------------------------------------
+## Instalação
 
+**1. Inicialize o projeto**
+
+```bash
+npm init -y
+```
+
+**2. Instale o Electron**
+
+```bash
+npm install electron --save-dev
+```
+
+**3. Instale o Electron Builder**
+
+```bash
+npm install electron-builder --save-dev
+```
+
+---
+
+## Como Usar
+
+### Executar em modo desenvolvimento
+
+```bash
+npm start
+```
+
+Isso abre o aplicativo diretamente, sem gerar um instalador.
+
+### Configuração do `main.js`
+
+O arquivo `main.js` é o ponto de entrada do Electron. Ele cria a janela principal e carrega a tela de login:
+
+```javascript
 const { app, BrowserWindow } = require("electron");
-# Importa:
-# - app: controla o ciclo de vida da aplicação
-# - BrowserWindow: cria janelas
 
 function createWindow() {
-    # Função responsável por criar a janela principal
+  const win = new BrowserWindow({
+    width: 1400,
+    height: 900,
+    minWidth: 1000,
+    minHeight: 700,
+    autoHideMenuBar: true,
+    icon: "assets/icon.ico",
+    webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true
+    }
+  });
 
-    const win = new BrowserWindow({
-        width: 1400,
-        # Largura inicial da janela
-
-        height: 900,
-        # Altura inicial da janela
-
-        minWidth: 1000,
-        # Largura mínima permitida
-
-        minHeight: 700,
-        # Altura mínima permitida
-
-        autoHideMenuBar: true,
-        # Oculta a barra de menu padrão
-
-        icon: "assets/icon.ico",
-        # Define o ícone do aplicativo
-
-        webPreferences: {
-            nodeIntegration: false,
-            # Impede acesso direto ao Node.js no frontend
-
-            contextIsolation: true
-            # Isola o contexto por segurança
-        }
-    });
-
-    win.loadFile("frontend/login.html");
-    # Carrega a página inicial
+  win.loadFile("frontend/login.html");
 }
 
 app.whenReady().then(() => {
-    # Executa quando o Electron estiver pronto
+  createWindow();
 
-    createWindow();
-
-    app.on("activate", () => {
-        # No macOS, recria a janela ao clicar no ícone do app
-
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    });
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
 });
 
 app.on("window-all-closed", () => {
-    # Fecha o aplicativo quando todas as janelas forem encerradas
-
-    if (process.platform !== "darwin") {
-        # No macOS, é comum manter o app aberto
-        app.quit();
-    }
+  if (process.platform !== "darwin") app.quit();
 });
+```
 
-# ============================================================
+### Configuração do `package.json`
 
-
-
-# ============================================================
-# ARQUIVO package.json
-# ============================================================
-#
-# Este arquivo configura:
-# - Nome do projeto
-# - Scripts
-# - Dependências
-# - Geração do instalador
-#
-# ------------------------------------------------------------
-# Código:
-# ------------------------------------------------------------
-
+```json
 {
   "name": "sistema-ponto",
-  # Nome interno do projeto
-
   "version": "1.0.0",
-  # Versão atual
-
   "description": "Sistema de Ponto com Electron",
-  # Descrição do aplicativo
-
   "main": "main.js",
-  # Arquivo principal
-
   "author": "Miguel Santos",
-  # Autor do projeto
-
   "scripts": {
     "start": "electron .",
-    # Executa o projeto em modo desenvolvimento
-
     "build": "electron-builder"
-    # Gera o instalador
   },
-
   "devDependencies": {
     "electron": "^37.0.0",
-    # Dependência do Electron
-
     "electron-builder": "^26.0.0"
-    # Dependência do empacotador
   },
-
   "build": {
     "appId": "com.sistemaponto.app",
-    # Identificador único da aplicação
-
     "productName": "Sistema de Ponto",
-    # Nome exibido ao usuário
-
     "directories": {
       "output": "dist"
-      # Pasta onde será gerado o instalador
     },
-
     "files": [
       "frontend/**/*",
-      # Inclui todos os HTML
-
       "backend/**/*",
-      # Inclui todos os JavaScript
-
       "style/**/*",
-      # Inclui todos os CSS
-
       "assets/**/*",
-      # Inclui imagens e ícones
-
       "main.js",
-      # Inclui o arquivo principal
-
       "package.json"
-      # Inclui a configuração
     ],
-
     "win": {
       "target": ["nsis"],
-      # Gera instalador .exe
-
       "icon": "assets/icon.ico"
-      # Ícone do executável
     }
   }
 }
+```
 
-# ============================================================
+---
 
+## Armazenamento de Dados
 
+Os dados são salvos localmente no computador do usuário via `localStorage`:
 
-# ============================================================
-# EXECUTAR O PROJETO
-# ============================================================
-#
-# npm start
-#
-# Explicação:
-# - Executa o script "start" definido no package.json
-# - Abre o aplicativo em modo desenvolvimento
-#
-# ============================================================
+| Chave | Conteúdo |
+|---|---|
+| `usuarios` | Lista de usuários cadastrados |
+| `usuarioLogado` | Sessão do usuário atual |
+| `funcionarios` | Cadastro de funcionários |
+| `oficineiros` | Cadastro de oficineiros |
 
+### Backup
 
+O sistema permite exportar e importar os dados em formato JSON, garantindo recuperação em caso de perda ou migração para outro computador.
 
-# ============================================================
-# GERAR O INSTALADOR
-# ============================================================
-#
-# npm run build
-#
-# Explicação:
-# - Executa o script "build"
-# - Gera o instalador para Windows
-#
-# ============================================================
+---
 
+## Geração do Instalador
 
+```bash
+npm run build
+```
 
-# ============================================================
-# ARQUIVOS GERADOS
-# ============================================================
-#
-# Após a compilação, a pasta dist/ será criada:
-#
-# dist/
-# ├── Sistema de Ponto Setup 1.0.0.exe
-# └── win-unpacked/
-#
-# O arquivo .exe é o instalador que pode ser distribuído.
-#
-# ============================================================
+Após a compilação, a pasta `dist/` será criada com os seguintes arquivos:
 
+```
+dist/
+├── Sistema de Ponto Setup 1.0.0.exe   ← instalador para distribuição
+└── win-unpacked/
+```
 
+---
 
-# ============================================================
-# ARMAZENAMENTO DE DADOS
-# ============================================================
-#
-# O sistema utiliza localStorage para armazenar:
-#
-# - usuarios
-# - usuarioLogado
-# - funcionarios
-# - oficineiros
-#
-# Os dados ficam salvos localmente no computador do usuário.
-#
-# ============================================================
+## Melhorias Futuras
 
+- [ ] Banco de dados SQLite para maior robustez
+- [ ] Criptografia de senhas
+- [ ] Controle de permissões por nível de acesso
+- [ ] Atualizações automáticas via Electron Updater
+- [ ] Integração com nuvem para backup remoto
 
+---
 
-# ============================================================
-# BACKUP DO SISTEMA
-# ============================================================
-#
-# O sistema permite:
-#
-# - Exportar backup em JSON
-# - Importar backup em JSON
-#
-# Isso garante recuperação de dados em caso de perda.
-#
-# ============================================================
+## Autor
 
+Desenvolvido por **Miguel Santos**.
 
+---
 
-# ============================================================
-# IMPORTAÇÃO DE PLANILHAS
-# ============================================================
-#
-# Utiliza a biblioteca SheetJS.
-#
-# Formatos aceitos:
-#
-# - .xlsx
-# - .xls
-#
-# ============================================================
+## Licença
 
-
-
-# ============================================================
-# RELATÓRIOS EM PDF
-# ============================================================
-#
-# Utiliza a biblioteca jsPDF.
-#
-# Relatórios disponíveis:
-#
-# - Funcionários
-# - Oficineiros
-#
-# ============================================================
-
-
-
-# ============================================================
-# TECNOLOGIAS UTILIZADAS
-# ============================================================
-#
-# - HTML5
-# - CSS3
-# - JavaScript ES6
-# - LocalStorage
-# - Electron
-# - Electron Builder
-# - SheetJS
-# - jsPDF
-#
-# ============================================================
-
-
-
-# ============================================================
-# MELHORIAS FUTURAS
-# ============================================================
-#
-# - Banco de dados SQLite
-# - Criptografia de senhas
-# - Controle de permissões
-# - Atualizações automáticas
-# - Integração com nuvem
-#
-# ============================================================
-
-
-
-# ============================================================
-# AUTOR
-# ============================================================
-#
-# Miguel Santos
-#
-# ============================================================
-
-
-
-# ============================================================
-# LICENÇA
-# ============================================================
-#
-# Projeto de uso interno para controle de ponto da instituição.
-#
-# ============================================================
+Projeto de uso interno para controle de ponto da instituição.
