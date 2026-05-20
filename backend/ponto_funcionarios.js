@@ -1,12 +1,11 @@
 function registrarPonto(dados) {
     // Recupera registros já existentes
     let registros =
-        JSON.parse(localStorage.getItem("oficineiros")) || [];
+        JSON.parse(localStorage.getItem("funcionarios")) || [];
 
-    // Validação dos campos obrigatórios
+    // Validação básica
     if (
         !dados.nome ||
-        !dados.matricula ||
         !dados.atividade ||
         !dados.data ||
         !dados.entrada ||
@@ -22,7 +21,6 @@ function registrarPonto(dados) {
     // Cria objeto com os dados do formulário
     const novoRegistro = {
         nome: dados.nome.trim(),
-        matricula: dados.matricula.trim(),
         atividade: dados.atividade.trim(),
         data: dados.data,
         entrada: dados.entrada,
@@ -38,44 +36,30 @@ function registrarPonto(dados) {
 
     // Salva no localStorage
     localStorage.setItem(
-        "oficineiros",
+        "funcionarios",
         JSON.stringify(registros)
     );
 
     alert("Ponto registrado com sucesso!");
 
-    // Limpa o formulário
+    // Limpa formulário
     form.reset();
 
-    // Preenche a data atual novamente
+    // Define a data atual novamente (opcional)
     const campoData = document.getElementById("data");
     if (campoData) {
         campoData.value = new Date()
             .toISOString()
             .split("T")[0];
     }
-
-    // Mantém a situação padrão selecionada
-    const campoSituacao =
-        document.getElementById("situacao");
-    if (campoSituacao) {
-        campoSituacao.value = "ativo";
-    }
-
-    // Exibe no console os dados salvos
-    console.log(
-        JSON.parse(localStorage.getItem("oficineiros"))
-    );
 }
 
-// ==============================
 // FORMULÁRIO
-// ==============================
 
-const form = document.getElementById("oficineiros");
+const form = document.getElementById("funcionarios");
 
 if (form) {
-    // Preenche automaticamente a data atual
+    // Preenche automaticamente a data com o dia atual
     const campoData = document.getElementById("data");
     if (campoData && !campoData.value) {
         campoData.value = new Date()
@@ -83,18 +67,19 @@ if (form) {
             .split("T")[0];
     }
 
-    // Evento de envio do formulário
     form.addEventListener("submit", function (e) {
         e.preventDefault();
 
         const dadosForm = new FormData(form);
 
-        // Converte todos os campos em objeto
+        // Converte os dados do formulário em objeto
         const dados =
             Object.fromEntries(dadosForm.entries());
 
         registrarPonto(dados);
+
     });
+    
 } else {
-    alert('Formulário com id "oficineiros" não encontrado.');
+    alert('Formulário com id "funcionarios" não encontrado.');
 }

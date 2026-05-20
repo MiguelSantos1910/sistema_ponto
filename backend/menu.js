@@ -1,181 +1,367 @@
-// Verifica login
-const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+// ==========================================
+// VERIFICAÇÃO DE LOGIN
+// ==========================================
+const usuarioLogado = JSON.parse(
+    localStorage.getItem("usuarioLogado")
+);
 
 if (!usuarioLogado) {
     alert("Faça login primeiro!");
     window.location.href = "../frontend/login.html";
 }
 
-// Exibe nome do usuário logado
-const el = document.getElementById("usuarioLogadoNome");
-if (el && usuarioLogado) {
-    el.textContent = usuarioLogado.nome;
-    el.style.color = "black";
+// ==========================================
+// ELEMENTOS DA INTERFACE
+// ==========================================
+const elUsuario = document.getElementById(
+    "usuarioLogadoNome"
+);
+
+const botaoLogout = document.querySelector(
+    ".logout-button"
+);
+
+const iniciarPonto = document.querySelector(
+    ".cadastro-ponto"
+);
+
+const finalizarPonto = document.querySelector(
+    ".finalizar-ponto"
+);
+
+const statusExpediente = document.getElementById(
+    "status-expediente"
+);
+
+const saldoHorasMenu = document.getElementById(
+    "saldo-horas-menu"
+);
+
+// ==========================================
+// EXIBE NOME DO USUÁRIO
+// ==========================================
+if (elUsuario && usuarioLogado) {
+    elUsuario.textContent = usuarioLogado.nome;
 }
 
-// Logout
-const botaoLogout = document.querySelector(".logout-button");
-
+// ==========================================
+// LOGOUT
+// ==========================================
 if (botaoLogout) {
     botaoLogout.addEventListener("click", function () {
-        localStorage.removeItem("usuarioLogado");
-        window.location.href = "../frontend/login.html";
+        if (confirm("Deseja realmente sair do sistema?")) {
+            localStorage.removeItem("usuarioLogado");
+            window.location.href =
+                "../frontend/login.html";
+        }
     });
 }
 
-// Botões de ponto
-const iniciarPonto = document.querySelector(".cadastro-ponto");
-const finalizarPonto = document.querySelector(".finalizar-ponto");
-
-// Utilitário para obter data e hora atual
+// ==========================================
+// UTILITÁRIOS
+// ==========================================
 function obterDataHoraAtual() {
     const agora = new Date();
+
     return {
         data: agora.toLocaleDateString("pt-BR"),
         hora: agora.toLocaleTimeString("pt-BR")
     };
 }
 
-// Atualiza estado dos botões
-function atualizarBotoes() {
-    // Só executa se os dois botões existirem
-    if (!iniciarPonto || !finalizarPonto || !usuarioLogado) {
+function obterUsuarios() {
+    try {
+        return JSON.parse(
+            localStorage.getItem("usuarios")
+        ) || [];
+    } catch (error) {
+        console.error(
+            "Erro ao ler usuários:",
+            error
+        );
+        return [];
+    }
+}
+
+function salvarUsuarios(usuarios) {
+    localStorage.setItem(
+        "usuarios",
+        JSON.stringify(usuarios)
+    );
+}
+
+function atualizarUsuarioLogado(usuarioAtualizado) {
+    localStorage.setItem(
+        "usuarioLogado",
+        JSON.stringify(usuarioAtualizado)
+    );
+}
+
+function obterUsuarioAtual() {
+    const usuarios = obterUsuarios();
+
+    return usuarios.find(
+        u => u.usuario === usuarioLogado.usuario
+    );
+}
+
+function formatarHoras(minutosTotais) {
+    const sinal = minutosTotais >= 0 ? "+" : "-";
+    const abs = Math.abs(minutosTotais);
+
+    const horas = Math.floor(abs / 60);
+    const minutos = abs % 60;
+
+    return `${sinal}${String(horas).padStart(2, "0")}:${String(
+        minutos
+    ).padStart(2, "0")}`;
+}
+
+function calcularMinutosEntre(entrada, saida) {
+    if (!entrada || !saida) {
+        return 0;
+    }
+
+    const [hE, mE] = entrada.split(":").map(Number);
+    const [hS, mS] = saida.split(":").map(Number);
+
+    return (hS * 60 + mS) - (hE * 60 + mE);
+}
+
+// ==========================================
+// ATUALIZA STATUS DO EXPEDIENTE
+// ==========================================
+function atualizarStatusExpediente() {
+    if (!statusExpediente) {
         return;
     }
 
-    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-    const usuarioAtual = usuarios.find(
-        u => u.usuario === usuarioLogado.usuario
-    );
-
+    const usuarioAtual = obterUsuarioAtual();
     const hoje = new Date().toLocaleDateString("pt-BR");
 
-    // Compatível com todos os navegadores
     const pontoAberto = [...(usuarioAtual?.pontos || [])]
         .reverse()
-        .find(p => p.data === hoje && p.saida === null);
+        .find(
+            ponto =>
+                ponto.data === hoje &&
+                ponto.saida === null
+        );
 
-    // Se existe ponto aberto:
-    // - desabilita entrada
-    // - habilita saída
+    if (pontoAberto) {
+        statusExpediente.textContent =
+            "Em expediente";
+        statusExpediente.style.color = "#2e7d32";
+    } else {
+        statusExpediente.textContent =
+            "Fora do expediente";
+        statusExpediente.style.color = "#666";
+    }
+}
+
+// ==========================================
+// ATUALIZA BANCO DE HORAS
+// ==========================================
+function atualizarBancoHoras() {
+    if (!saldoHorasMenu) {
+        return;
+    }
+
+    const usuarioAtual = obterUsuarioAtual();
+    const pontos = usuarioAtual?.pontos || [];
+
+    const CARGA_DIARIA = 8 * 60; // 8 horas
+    let saldoMinutos = 0;
+
+    pontos.forEach(ponto => {
+        if (ponto.entrada && ponto.saida) {
+            const minutosTrabalhados =
+                calcularMinutosEntre(
+                    ponto.entrada,
+                    ponto.saida
+                );
+
+            saldoMinutos +=
+                minutosTrabalhados -
+                CARGA_DIARIA;
+        }
+    });
+
+    saldoHorasMenu.textContent =
+        formatarHoras(saldoMinutos);
+
+    saldoHorasMenu.style.color =
+        saldoMinutos >= 0
+            ? "#2e7d32"
+            : "#c62828";
+}
+
+// ==========================================
+// ATUALIZA BOTÕES
+// ==========================================
+function atualizarBotoes() {
+    if (
+        !iniciarPonto ||
+        !finalizarPonto ||
+        !usuarioLogado
+    ) {
+        return;
+    }
+
+    const usuarioAtual = obterUsuarioAtual();
+    const hoje = new Date().toLocaleDateString("pt-BR");
+
+    const pontoAberto = [...(usuarioAtual?.pontos || [])]
+        .reverse()
+        .find(
+            ponto =>
+                ponto.data === hoje &&
+                ponto.saida === null
+        );
+
+    // Habilita/desabilita botões
     iniciarPonto.disabled = !!pontoAberto;
     finalizarPonto.disabled = !pontoAberto;
 
-    // Ajuste visual
-    iniciarPonto.style.opacity = pontoAberto ? "0.5" : "1";
-    finalizarPonto.style.opacity = pontoAberto ? "1" : "0.5";
+    // Aparência visual
+    iniciarPonto.style.opacity =
+        pontoAberto ? "0.6" : "1";
+
+    finalizarPonto.style.opacity =
+        pontoAberto ? "1" : "0.6";
+
+    iniciarPonto.style.cursor =
+        pontoAberto ? "not-allowed" : "pointer";
+
+    finalizarPonto.style.cursor =
+        pontoAberto ? "pointer" : "not-allowed";
 }
 
-// Registrar entrada
-if (iniciarPonto && usuarioLogado) {
-    iniciarPonto.addEventListener("click", function () {
-        const { data, hora } = obterDataHoraAtual();
+// ==========================================
+// REGISTRAR ENTRADA
+// ==========================================
+function registrarEntrada() {
+    const { data, hora } = obterDataHoraAtual();
+    const usuarios = obterUsuarios();
 
-        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const index = usuarios.findIndex(
+        u => u.usuario === usuarioLogado.usuario
+    );
 
-        const index = usuarios.findIndex(
-            u => u.usuario === usuarioLogado.usuario
-        );
+    if (index === -1) {
+        alert("Usuário não encontrado.");
+        return;
+    }
 
-        const registroEntrada = {
-            data,
-            entrada: hora,
-            saida: null
-        };
+    if (!usuarios[index].pontos) {
+        usuarios[index].pontos = [];
+    }
 
-        if (index !== -1) {
-            if (!usuarios[index].pontos) {
-                usuarios[index].pontos = [];
-            }
+    const pontoAberto = usuarios[index].pontos.some(
+        ponto =>
+            ponto.data === data &&
+            ponto.saida === null
+    );
 
-            // Verifica se já existe expediente aberto hoje
-            const jaEntrou = usuarios[index].pontos.some(
-                p => p.data === data && p.saida === null
-            );
+    if (pontoAberto) {
+        alert("Você já registrou entrada hoje!");
+        return;
+    }
 
-            if (jaEntrou) {
-                alert("Você já registrou entrada hoje!");
-                return;
-            }
-
-            usuarios[index].pontos.push(registroEntrada);
-
-            // Atualiza também o usuário logado
-            localStorage.setItem(
-                "usuarioLogado",
-                JSON.stringify(usuarios[index])
-            );
-        } else {
-            // Caso o usuário não esteja na lista
-            usuarioLogado.pontos = [registroEntrada];
-            usuarios.push(usuarioLogado);
-
-            localStorage.setItem(
-                "usuarioLogado",
-                JSON.stringify(usuarioLogado)
-            );
-        }
-
-        // Salva usuários atualizados
-        localStorage.setItem(
-            "usuarios",
-            JSON.stringify(usuarios)
-        );
-
-        alert(`Entrada registrada: ${data} às ${hora}`);
-
-        // Atualiza os botões imediatamente
-        atualizarBotoes();
+    usuarios[index].pontos.push({
+        data,
+        entrada: hora,
+        saida: null
     });
+
+    salvarUsuarios(usuarios);
+    atualizarUsuarioLogado(usuarios[index]);
+
+    alert(`Entrada registrada em ${data} às ${hora}`);
+
+    atualizarInterface();
 }
 
-// Registrar saída
-if (finalizarPonto && usuarioLogado) {
-    finalizarPonto.addEventListener("click", function () {
-        const { data, hora } = obterDataHoraAtual();
+// ==========================================
+// REGISTRAR SAÍDA
+// ==========================================
+function registrarSaida() {
+    const { data, hora } = obterDataHoraAtual();
+    const usuarios = obterUsuarios();
 
-        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    const index = usuarios.findIndex(
+        u => u.usuario === usuarioLogado.usuario
+    );
 
-        const index = usuarios.findIndex(
-            u => u.usuario === usuarioLogado.usuario
+    if (
+        index === -1 ||
+        !usuarios[index].pontos
+    ) {
+        alert(
+            "Nenhuma entrada encontrada para finalizar."
+        );
+        return;
+    }
+
+    const pontoAberto = [...usuarios[index].pontos]
+        .reverse()
+        .find(
+            ponto =>
+                ponto.data === data &&
+                ponto.saida === null
         );
 
-        if (index !== -1 && usuarios[index].pontos) {
-            const pontos = usuarios[index].pontos;
+    if (!pontoAberto) {
+        alert(
+            "Nenhuma entrada encontrada para registrar saída!"
+        );
+        return;
+    }
 
-            // Procura o último ponto em aberto
-            const ultimoPonto = [...pontos]
-                .reverse()
-                .find(p => p.data === data && p.saida === null);
+    pontoAberto.saida = hora;
 
-            if (ultimoPonto) {
-                ultimoPonto.saida = hora;
+    salvarUsuarios(usuarios);
+    atualizarUsuarioLogado(usuarios[index]);
 
-                // Salva usuários atualizados
-                localStorage.setItem(
-                    "usuarios",
-                    JSON.stringify(usuarios)
-                );
+    alert(`Saída registrada em ${data} às ${hora}`);
 
-                // Atualiza também o usuário logado
-                localStorage.setItem(
-                    "usuarioLogado",
-                    JSON.stringify(usuarios[index])
-                );
-
-                alert(`Saída registrada: ${data} às ${hora}`);
-
-                // Atualiza os botões imediatamente
-                atualizarBotoes();
-            } else {
-                alert("Nenhuma entrada encontrada para registrar saída!");
-            }
-        } else {
-            alert("Usuário não encontrado. Registre a entrada primeiro!");
-        }
-    });
+    atualizarInterface();
 }
 
-// Atualiza o estado dos botões ao carregar a página
-atualizarBotoes();
+// ==========================================
+// EVENTOS DOS BOTÕES
+// ==========================================
+if (iniciarPonto) {
+    iniciarPonto.addEventListener(
+        "click",
+        registrarEntrada
+    );
+}
+
+if (finalizarPonto) {
+    finalizarPonto.addEventListener(
+        "click",
+        registrarSaida
+    );
+}
+
+// ==========================================
+// ATUALIZA TODA A INTERFACE
+// ==========================================
+function atualizarInterface() {
+    atualizarBotoes();
+    atualizarStatusExpediente();
+    atualizarBancoHoras();
+}
+
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+        atualizarInterface();
+    }
+);
+
+// Caso o script seja carregado após o DOM
+atualizarInterface();
