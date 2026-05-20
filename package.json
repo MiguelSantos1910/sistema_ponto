@@ -1,16 +1,63 @@
 {
-  "name": "app_ponto",
+  "name": "sistema-ponto",
   "version": "1.0.0",
+  "description": "Sistema de Ponto desenvolvido com HTML, CSS e JavaScript",
   "main": "main.js",
-  "start": "electron .",
+  "author": "Miguel Santos",
+  "license": "MIT",
+
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron .",
+    "build": "electron-builder",
+    "build-linux": "electron-builder --linux",
+    "build-win": "electron-builder --win"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+
   "devDependencies": {
-    "electron": "^41.0.3"
+    "electron": "^38.0.0",
+    "electron-builder": "^26.0.12"
+  },
+
+  "build": {
+    "appId": "com.sistemaponto.app",
+    "productName": "Sistema de Ponto",
+
+    "directories": {
+      "output": "dist"
+    },
+
+    "files": [
+      "frontend/**/*",
+      "backend/**/*",
+      "style/**/*",
+      "assets/**/*",
+      "main.js",
+      "package.json"
+    ],
+
+    "extraMetadata": {
+      "main": "main.js"
+    },
+
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office"
+    },
+
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
   }
 }
